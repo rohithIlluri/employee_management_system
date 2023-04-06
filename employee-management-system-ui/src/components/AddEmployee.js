@@ -11,6 +11,8 @@ const AddEmployee = () => {
   });
 
 
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -26,6 +28,7 @@ const AddEmployee = () => {
       })
       .catch((error) => {
         console.log(error.response.data);
+        navigate("/employeeList")
       });
   };
 
@@ -86,7 +89,7 @@ const AddEmployee = () => {
             Save
           </button>
           <button
-            onClick={reset}
+          onClick={reset}
             className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6">
             Clear
           </button>
