@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
+import Employee from './Employee';
 
 function EmployeeList() {
 
@@ -26,6 +27,18 @@ function EmployeeList() {
     }
     fetchData();
   }, []);
+
+ const deleteEmployee = (e, id) => {
+  e.preventDefault();
+  EmployeeService.deleteEmployee(id).then((res) => {
+    if(employees){
+      setEmployees((prevElement) => {
+        return prevElement.filter((employee) => employee.id !== id
+        );
+      });
+    }
+  });
+ };
     
   
   return (
@@ -49,7 +62,7 @@ function EmployeeList() {
         <tbody>
           {employees.map((employee) =>(
             
-         <Employee employee={employee} key={employee.id}></Employee>
+         <Employee employee={employee} deleteEmployee={deleteEmployee} key={employee.id}></Employee>
           ))}
         </tbody>)}
       </table>
